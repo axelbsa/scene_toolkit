@@ -26,7 +26,7 @@ Rectangle left_player_rect = {4, 120, pad_width, 120};
 enum Dir {UP, DOWN, LEFT, RIGHT};
 Dir ball_direction = LEFT;
 Vector2 ball_position = {screenWidth / 2, screenHeight / 2};
-Vector2 ball_velocity = {500.0, 1.0};
+Vector2 ball_velocity = {500.0, 500.0};
 
 
 bool check_up_down_collision(Rectangle rect, Dir direction)
@@ -165,7 +165,7 @@ void Draw()
 int main()
 {
     SetConfigFlags(FLAG_VSYNC_HINT); // Use before InitWindow()
-    InitWindow(screenWidth, screenHeight, "Dappy happy flappy");
+    InitWindow(screenWidth, screenHeight, "Friday warm beer pong");
     SetTargetFPS(60);       // Set our game to run at 60 frames-per-second
 
 
