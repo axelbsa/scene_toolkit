@@ -1,20 +1,23 @@
 #LFLAGS=-lraylib -lopengl32 -lraylib -lglfw3 -lgdi32
 
 CC=g++
-CFLAGS=-O2 -Wall -std=c++11 -Wno-missing-braces
-# LFLAGS=-lraylib -lGL -lraylib -lglfw3 -lX11 -lGLU -lglfw3 -lX11 -lXxf86vm -lXrandr -lpthread -lXi -ldl
-LFLAGS=-lraylib -lglfw3 -lX11 -lXxf86vm -lXrandr -pthread -lXi -ldl -lXinerama -lXi -lXcursor -lGL -lGLU -lpthread
+LD=ld
+CFLAGS=-O2 -Wall -std=c++11 -Wno-missing-braces -Isrc/ -Llib/
+LFLAGS=-lraylib -lX11 -lXrandr -pthread -lXi -ldl -lXinerama -lXi -lXcursor -lGL -lGLU -lpthread -lrocket
 
 # Windows LFLAGS
 #LFLAGS=-lraylib -lopengl32 -lraylib -lglfw3 -lgdi32
 
-SOURCES=main.cpp
+OUT := ray
+
+SOURCES := src/main.cpp src/scene_state_machine.cpp src/scenes/game_scene/scene_game.cpp src/scenes/splash_scene/splash_screen.cpp
+SOBJS := $(SOURCES:%=$(BUILD_DIR)/%.o)
 
 all:
-	$(CC) $(SOURCES) $(CFLAGS) $(LFLAGS) -o ray
+	$(CC) $(SOURCES) $(CFLAGS) $(LFLAGS) -o $(OUT)
 
 debug:
-	$(CC) -DDEBUG $(SOURCES) $(CFLAGS) $(LFLAGS) -o ray
+	$(CC) -g -DDEBUG $(SOURCES) -Wall -std=c++11 -Isrc/ -Llib/ $(LFLAGS) -o $(OUT)
 
 clean:
-	del ray
+	rm ray
